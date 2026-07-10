@@ -5,6 +5,8 @@
   "scripts": {
     "test": "playwright test --browser=chromium",
     "test:headed": "playwright test --headed",
+    "test:firefox": "playwright test --browser=firefox",
+    "test:webkit": "playwright test --browser=webkit",
     "report": "playwright show-report"
   },
   "devDependencies": {
