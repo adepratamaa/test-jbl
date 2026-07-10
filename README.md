@@ -54,6 +54,8 @@ Run all tests in Chromium:
 npm run test
 ```
 
+This command runs the Playwright test specs in the `tests` folder. The tests read the target URL and credentials from `.env`, use page objects from `src/pages`, and generate Playwright test results/report files after execution.
+
 Run tests in headed mode:
 
 ```bash
@@ -65,6 +67,17 @@ Open the Playwright HTML report after a test run:
 ```bash
 npm run report
 ```
+
+## Test Flow Example
+
+The test flow follows the Page Object Model pattern. A test file creates the needed page objects, performs user actions through those page objects, and verifies the expected page state.
+
+Example: User login with valid credentials
+
+1. Open the login page using `LoginPage.open()`.
+2. Verify the login page is loaded using `LoginPage.expectLoaded()`.
+3. Submit the valid username and password from `src/data/loginUsers.ts`.
+4. Verify the inventory page is loaded using `InventoryPage.expectLoaded()`.
 
 ## Assumptions Made
 
