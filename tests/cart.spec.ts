@@ -5,7 +5,6 @@ import { getEnv } from '../src/config/env';
 import { InventoryPage } from '../src/pages/InventoryPage';
 import { products } from '../src/data/products';
 import { ProductItem } from '../src/pages/ProductItem';
-import { CheckoutPage } from '../src/pages/CheckoutPage';
 
 // log in before each cart test
 test.beforeEach(async ({ page }) => {
