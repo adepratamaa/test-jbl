@@ -18,8 +18,8 @@ This project is an automated UI test framework using Playwright and written in T
 ## Clone Repository
 
 ```bash
-git clone https://github.com/adepratamaa/test-jbl.git
-cd test-jbl
+git clone https://github.com/adepratamaa/test-automation-demo-v2.git
+cd test-automation-demo-v2
 ```
 
 ## Setup Instructions
