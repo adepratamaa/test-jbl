@@ -82,7 +82,7 @@ Example: User login with valid credentials
 ## Assumptions Made
 
 - The application is Sauce Demo.
-- Test users and passwords are provided through `.env`.
+- Test usernames and passwords are provided through `.env` file.
 - The test data in `src/data` matches the current Sauce Demo product names and login users.
 - Playwright reports and test results are generated locally and not committed to the repository.
 
