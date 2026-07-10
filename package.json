@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "test": "playwright test --browser=chromium",
-    "test:headed": "playwright test --headed",
-    "test:firefox": "playwright test --browser=firefox",
-    "test:webkit": "playwright test --browser=webkit",
+    "test": "playwright test --project=chromium",
+    "test:headed": "playwright test --project=chromium --headed",
+    "test:firefox": "playwright test --project=firefox",
+    "test:webkit": "playwright test --project=webkit",
     "report": "playwright show-report"
   },
   "devDependencies": {

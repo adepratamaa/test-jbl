@@ -3,6 +3,8 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+const authFile = 'playwright/.auth/user.json';
+
 export default defineConfig({
   testDir: './tests',
   timeout: 30000,
@@ -22,4 +24,34 @@ export default defineConfig({
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
   },
+  projects: [
+    {
+      name: 'setup',
+      testMatch: /.*\.setup\.ts/,
+    },
+    {
+      name: 'chromium',
+      dependencies: ['setup'],
+      use: {
+        browserName: 'chromium',
+        storageState: authFile,
+      },
+    },
+    // {
+    //   name: 'firefox',
+    //   dependencies: ['setup'],
+    //   use: {
+    //     browserName: 'firefox',
+    //     storageState: authFile,
+    //   },
+    // },
+    // {
+    //   name: 'webkit',
+    //   dependencies: ['setup'],
+    //   use: {
+    //     browserName: 'webkit',
+    //     storageState: authFile,
+    //   },
+    // },
+  ],
 });

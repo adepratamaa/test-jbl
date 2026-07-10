@@ -1,21 +1,14 @@
 import { expect, test } from '@playwright/test';
 import { CartPage } from '../src/pages/CartPage';
-import { LoginPage } from '../src/pages/LoginPage';
-import { getEnv } from '../src/config/env';
 import { InventoryPage } from '../src/pages/InventoryPage';
 import { products } from '../src/data/products';
 import { ProductItem } from '../src/pages/ProductItem';
 
-// log in before each cart test
+// open inventory page using the saved authenticated session
 test.beforeEach(async ({ page }) => {
-  const loginPage = new LoginPage(page);
   const productsPage = new InventoryPage(page);
 
-  await loginPage.open();
-  await loginPage.login(
-    getEnv('STANDARD_USERNAME'),
-    getEnv('STANDARD_PASSWORD'),
-  );
+  await page.goto('/inventory.html');
   await productsPage.expectLoaded();
 });
 

@@ -1,8 +1,6 @@
 import { expect, test } from '@playwright/test';
 import { faker } from '@faker-js/faker';
 import { CartPage } from '../src/pages/CartPage';
-import { LoginPage } from '../src/pages/LoginPage';
-import { getEnv } from '../src/config/env';
 import { InventoryPage } from '../src/pages/InventoryPage';
 import { products } from '../src/data/products';
 import { ProductItem } from '../src/pages/ProductItem';
@@ -10,15 +8,10 @@ import { CheckoutPage } from '../src/pages/CheckoutPage';
 
 // verify checkout can be completed
 test('User can checkout the cart', async ({ page }) => {
-  const loginPage = new LoginPage(page);
   const productsPage = new InventoryPage(page);
   const checkoutPage = new CheckoutPage(page);
 
-  await loginPage.open();
-  await loginPage.login(
-    getEnv('STANDARD_USERNAME'),
-    getEnv('STANDARD_PASSWORD'),
-  );
+  await page.goto('/inventory.html');
   await productsPage.expectLoaded();
 
   const cartPage = new CartPage(page);

@@ -3,6 +3,8 @@ import { loginUsers } from '../src/data/loginUsers';
 import { LoginPage } from '../src/pages/LoginPage';
 import { InventoryPage } from '../src/pages/InventoryPage';
 
+test.use({ storageState: { cookies: [], origins: [] } });
+
 test(`User login with valid credentials`, async ({ page }) => {
   const loginPage = new LoginPage(page);
   const productsPage = new InventoryPage(page);
