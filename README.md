@@ -1,6 +1,6 @@
-# Test Automation Demo
+# Test Automation Framework
 
-This project is an automated UI test framework for Sauce Demo using Playwright and written in TypeScript. This framework is using the Page Object Model pattern to keep page selectors and page actions separate from the test scenarios.
+This project is an automated UI test framework using Playwright and written in TypeScript. This framework is using the Page Object Model pattern to keep page selectors and page actions separate from the test scenarios.
 
 - `playwright.config.ts` contains Playwright test configuration.
 - `src/pages` contains Page Object Model classes.
