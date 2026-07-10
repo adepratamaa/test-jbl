@@ -22,19 +22,19 @@ git clone https://github.com/adepratamaa/test-jbl.git
 cd test-jbl
 ```
 
-## Install Dependencies
+## Setup Instructions
+
+Make sure Node.js is installed, then install project dependencies:
 
 ```bash
 npm install
 ```
 
-## Install Playwright
+Install the Playwright browser binaries:
 
 ```bash
 npx playwright install
 ```
-
-## Setup Environment Variables
 
 Create a `.env` file in the project root:
 
@@ -46,17 +46,32 @@ INVALID_USERNAME=invalid_user
 INVALID_PASSWORD=qwerty123
 ```
 
-## Run Tests
+## How to Run Tests
+
+Run all tests in Chromium:
 
 ```bash
 npm run test
 ```
 
-## Open report
+Run tests in headed mode:
+
+```bash
+npm run test:headed
+```
+
+Open the Playwright HTML report after a test run:
 
 ```bash
 npm run report
 ```
+
+## Assumptions Made
+
+- The application is Sauce Demo.
+- Test users and passwords are provided through `.env`.
+- The test data in `src/data` matches the current Sauce Demo product names and login users.
+- Playwright reports and test results are generated locally and not committed to the repository.
 
 ## Run GitHub Actions
 
@@ -69,14 +84,6 @@ To run the workflow manually:
 3. Select the `Test` workflow.
 4. Click `Run workflow`.
 5. Select the `main` branch, then click `Run workflow`.
-
-Before running in GitHub Actions, make sure these repository secrets are configured:
-
-- `BASE_URL`
-- `STANDARD_USERNAME`
-- `STANDARD_PASSWORD`
-- `INVALID_USERNAME`
-- `INVALID_PASSWORD`
 
 ## Next improvement
 
