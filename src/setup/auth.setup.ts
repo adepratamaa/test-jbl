@@ -1,8 +1,8 @@
 import { mkdirSync } from 'fs';
 import { test as setup } from '@playwright/test';
-import { LoginPage } from '../src/pages/LoginPage';
-import { InventoryPage } from '../src/pages/InventoryPage';
-import { getEnv } from '../src/config/env';
+import { LoginPage } from '../pages/LoginPage';
+import { InventoryPage } from '../pages/InventoryPage';
+import { getEnv } from '../config/env';
 
 const authFile = 'playwright/.auth/user.json';
 

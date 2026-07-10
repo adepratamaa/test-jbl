@@ -4,7 +4,7 @@ import { InventoryPage } from '../src/pages/InventoryPage';
 import { products } from '../src/data/products';
 import { ProductItem } from '../src/pages/ProductItem';
 
-// open inventory page using the saved authenticated session
+// open inventory page using auth session
 test.beforeEach(async ({ page }) => {
   const productsPage = new InventoryPage(page);
 

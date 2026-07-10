@@ -3,6 +3,7 @@ import { loginUsers } from '../src/data/loginUsers';
 import { LoginPage } from '../src/pages/LoginPage';
 import { InventoryPage } from '../src/pages/InventoryPage';
 
+// run this test file without any saved login session.
 test.use({ storageState: { cookies: [], origins: [] } });
 
 test(`User login with valid credentials`, async ({ page }) => {

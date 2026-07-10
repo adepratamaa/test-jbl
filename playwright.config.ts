@@ -27,6 +27,7 @@ export default defineConfig({
   projects: [
     {
       name: 'setup',
+      testDir: './src/setup',
       testMatch: /.*\.setup\.ts/,
     },
     {
@@ -37,21 +38,5 @@ export default defineConfig({
         storageState: authFile,
       },
     },
-    // {
-    //   name: 'firefox',
-    //   dependencies: ['setup'],
-    //   use: {
-    //     browserName: 'firefox',
-    //     storageState: authFile,
-    //   },
-    // },
-    // {
-    //   name: 'webkit',
-    //   dependencies: ['setup'],
-    //   use: {
-    //     browserName: 'webkit',
-    //     storageState: authFile,
-    //   },
-    // },
   ],
 });
