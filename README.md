@@ -77,13 +77,7 @@ npm run report
 
 This project runs tests automatically when new changes are pushed to the `main` branch.
 
-To run the workflow manually:
-
-1. Open the repository on GitHub.
-2. Go to the `Actions` tab.
-3. Select the `Test` workflow.
-4. Click `Run workflow`.
-5. Select the `main` branch, then click `Run workflow`.
+To run the workflow manually, you must be logged in to GitHub and have permission to run workflows in this repository. If you do not have access, you can fork the repository and run the workflow from your fork, or clone the project and run the tests locally.
 
 ## Next improvement
 
