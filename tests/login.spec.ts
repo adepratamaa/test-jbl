@@ -8,12 +8,12 @@ test.use({ storageState: { cookies: [], origins: [] } });
 
 test(`User login with valid credentials`, async ({ page }) => {
   const loginPage = new LoginPage(page);
-  const productsPage = new InventoryPage(page);
+  const inventoryPage = new InventoryPage(page);
 
   await loginPage.open();
   await loginPage.expectLoaded();
   await loginPage.login(loginUsers[0].username, loginUsers[0].password);
-  await productsPage.expectLoaded();
+  await inventoryPage.expectLoaded();
 });
 
 test(`User login with invalid credentials`, async ({ page }) => {
