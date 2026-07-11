@@ -106,4 +106,3 @@ To run the workflow manually, you must be logged in to GitHub and have permissio
 
 - Add more test cases
 - Integrate with any tools
-- Improve login part to use `storageState`
