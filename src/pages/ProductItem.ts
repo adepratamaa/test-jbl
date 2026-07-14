@@ -4,11 +4,13 @@ export class ProductItem {
   readonly page: Page;
   readonly productName: string;
 
+  // identify a product by its displayed name
   constructor(page: Page, productName: string) {
     this.page = page;
     this.productName = productName;
   }
 
+  // locate the matching product
   get root() {
     return this.page.getByTestId('inventory-item').filter({
       hasText: this.productName,
@@ -35,6 +37,7 @@ export class ProductItem {
     return this.page.getByTestId('subtotal-label');
   }
 
+  // add or remove the selected product from the cart
   async addToCart() {
     await expect(this.root).toBeVisible();
     await this.addButton.click();
@@ -49,6 +52,7 @@ export class ProductItem {
     await expect(this.quantity).toHaveText(quantity);
   }
 
+  // read the displayed currency value and return it as a number
   async getPrice() {
     await expect(this.price).toBeVisible();
     const priceText = await this.price.innerText();
