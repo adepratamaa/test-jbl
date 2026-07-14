@@ -16,14 +16,20 @@ test('User can checkout the cart', async ({ page }) => {
 
   const cartPage = new CartPage(page);
   const backpack = new ProductItem(page, products.backpack.name);
+  const bikeLight = new ProductItem(page, products.bikeLight.name);
+  const backpackPrice = await backpack.getPrice();
+  const bikeLightPrice = await bikeLight.getPrice();
 
   await backpack.addToCart();
+  await bikeLight.addToCart();
+  await expect(productsPage.shoppingCartBadge).toHaveText('2');
   await expect(backpack.removeButton).toBeVisible();
-  await expect(productsPage.shoppingCartBadge).toHaveText('1');
+  await expect(bikeLight.removeButton).toBeVisible();
 
   await productsPage.cartLink.click();
   await cartPage.expectLoaded();
   await backpack.expectQuantity('1');
+  await bikeLight.expectQuantity('1');
 
   await cartPage.goToCheckout();
   await checkoutPage.expectInformationLoaded();
@@ -37,7 +43,12 @@ test('User can checkout the cart', async ({ page }) => {
   await checkoutPage.continueToOverview();
   await checkoutPage.expectOverviewLoaded();
   await backpack.expectQuantity('1');
-  await backpack.expectPrice(products.backpack.price);
+  await bikeLight.expectQuantity('1');
+  await backpack.expectPrice(backpackPrice);
+  await bikeLight.expectPrice(bikeLightPrice);
+  await expect(backpack.subtotal).toHaveText(
+    `Item total: $${backpackPrice + bikeLightPrice}`,
+  );
 
   await checkoutPage.finishCheckout();
   await checkoutPage.expectCompleteLoaded();

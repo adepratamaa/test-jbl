@@ -46,6 +46,8 @@ test('User can remove product from cart page', async ({ page }) => {
   const cartPage = new CartPage(page);
   const bikeLight = new ProductItem(page, products.bikeLight.name);
   const boltTShirt = new ProductItem(page, products.boltTShirt.name);
+  const bikeLightPrice = await bikeLight.getPrice();
+  const boltTShirtPrice = await boltTShirt.getPrice();
 
   await bikeLight.addToCart();
   await expect(bikeLight.removeButton).toBeVisible();
@@ -59,8 +61,8 @@ test('User can remove product from cart page', async ({ page }) => {
   await cartPage.expectLoaded();
   await bikeLight.expectQuantity('1');
   await boltTShirt.expectQuantity('1');
-  await bikeLight.expectPrice(products.bikeLight.price);
-  await boltTShirt.expectPrice(products.boltTShirt.price);
+  await bikeLight.expectPrice(bikeLightPrice);
+  await boltTShirt.expectPrice(boltTShirtPrice);
 
   await bikeLight.removeFromCart();
   await expect(bikeLight.removeButton).not.toBeVisible();

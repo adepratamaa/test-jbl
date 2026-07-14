@@ -31,6 +31,10 @@ export class ProductItem {
     return this.root.getByTestId('inventory-item-price');
   }
 
+  get subtotal() {
+    return this.page.getByTestId('subtotal-label');
+  }
+
   async addToCart() {
     await expect(this.root).toBeVisible();
     await this.addButton.click();
@@ -45,7 +49,13 @@ export class ProductItem {
     await expect(this.quantity).toHaveText(quantity);
   }
 
-  async expectPrice(price: string) {
-    await expect(this.price).toHaveText(price);
+  async getPrice() {
+    await expect(this.price).toBeVisible();
+    const priceText = await this.price.innerText();
+    return Number(priceText.replace('$', ''));
+  }
+
+  async expectPrice(price: number) {
+    await expect(this.price).toHaveText(`$${price}`);
   }
 }
