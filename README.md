@@ -56,7 +56,7 @@ npm run test
 
 This command runs the Playwright test specs in the `tests` folder. The tests read the target URL and credentials from `.env`, use page objects from `src/pages`, and generate Playwright test results/report files after execution.
 
-Before authenticated tests run, Playwright runs `src/setup/auth.setup.ts` to log in once and save the session to `playwright/.auth/user.json`. Cart and checkout tests reuse that saved `storageState`, while login and logout tests use a clean browser state so they can validate the login flow directly.
+Before authenticated tests run, Playwright runs `src/setup/auth.setup.ts` to log in once and save the session to `playwright/.auth/user.json`.
 
 Run tests in headed mode:
 
@@ -68,13 +68,6 @@ Open the Playwright HTML report after a test run:
 
 ```bash
 npm run report
-```
-
-Run tests in other browsers:
-
-```bash
-npm run test:firefox
-npm run test:webkit
 ```
 
 ## Test Flow Example
