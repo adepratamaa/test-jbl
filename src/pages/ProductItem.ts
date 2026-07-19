@@ -1,65 +1,63 @@
-import { expect, type Locator, type Page } from '@playwright/test';
+import { expect, type Page, Locator } from '@playwright/test';
 
 export class ProductItem {
   readonly page: Page;
-  readonly productName: string;
+  readonly inventoryItem: Locator;
 
-  // identify a product by its displayed name
-  constructor(page: Page, productName: string) {
+  constructor(page: Page) {
     this.page = page;
-    this.productName = productName;
+    this.inventoryItem = page.getByTestId('inventory-item');
   }
 
-  // locate the matching product
-  get root() {
-    return this.page.getByTestId('inventory-item').filter({
-      hasText: this.productName,
+  // locate a product by its displayed name
+  productByName(productName: string) {
+    return this.inventoryItem.filter({
+      hasText: productName,
     });
   }
 
-  get addButton() {
-    return this.root.getByRole('button', { name: 'Add to cart' });
+  addButton(productName: string) {
+    return this.productByName(productName).getByRole('button', {
+      name: 'Add to cart',
+    });
   }
 
-  get removeButton() {
-    return this.root.getByRole('button', { name: 'Remove' });
+  removeButton(productName: string) {
+    return this.productByName(productName).getByRole('button', {
+      name: 'Remove',
+    });
   }
 
-  get quantity() {
-    return this.root.getByTestId('item-quantity');
+  quantity(productName: string) {
+    return this.productByName(productName).getByTestId('item-quantity');
   }
 
-  get price() {
-    return this.root.getByTestId('inventory-item-price');
+  price(productName: string) {
+    return this.productByName(productName).getByTestId('inventory-item-price');
   }
 
-  get subtotal() {
-    return this.page.getByTestId('subtotal-label');
+  async addToCart(productName: string) {
+    await expect(this.productByName(productName)).toBeVisible();
+    await this.addButton(productName).click();
   }
 
-  // add or remove the selected product from the cart
-  async addToCart() {
-    await expect(this.root).toBeVisible();
-    await this.addButton.click();
+  async removeFromCart(productName: string) {
+    await expect(this.productByName(productName)).toBeVisible();
+    await this.removeButton(productName).click();
   }
 
-  async removeFromCart() {
-    await expect(this.root).toBeVisible();
-    await this.removeButton.click();
-  }
-
-  async expectQuantity(quantity: string) {
-    await expect(this.quantity).toHaveText(quantity);
+  async expectQuantity(productName: string, quantity: string) {
+    await expect(this.quantity(productName)).toHaveText(quantity);
   }
 
   // read the displayed currency value and return it as a number
-  async getPrice() {
-    await expect(this.price).toBeVisible();
-    const priceText = await this.price.innerText();
+  async getPrice(productName: string) {
+    await expect(this.price(productName)).toBeVisible();
+    const priceText = await this.price(productName).innerText();
     return Number(priceText.replace('$', ''));
   }
 
-  async expectPrice(price: number) {
-    await expect(this.price).toHaveText(`$${price}`);
+  async expectPrice(productName: string, productPrice: number) {
+    await expect(this.price(productName)).toHaveText(`$${productPrice}`);
   }
 }

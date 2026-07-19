@@ -8,9 +8,11 @@ export class CheckoutPage {
   readonly postalCode: Locator;
   readonly continueButton: Locator;
   readonly finishButton: Locator;
-  readonly cancelButton: Locator;
   readonly completeHeader: Locator;
   readonly backHomeButton: Locator;
+  readonly subTotal: Locator;
+  readonly taxLabel: Locator;
+  readonly totalLabel: Locator;
 
   // set up checkout page locators
   constructor(page: Page) {
@@ -21,9 +23,11 @@ export class CheckoutPage {
     this.postalCode = page.getByTestId('postalCode');
     this.continueButton = page.getByTestId('continue');
     this.finishButton = page.getByTestId('finish');
-    this.cancelButton = page.getByTestId('cancel');
     this.completeHeader = page.getByTestId('complete-header');
     this.backHomeButton = page.getByTestId('back-to-products');
+    this.subTotal = page.getByTestId('subtotal-label');
+    this.taxLabel = page.getByTestId('tax-label');
+    this.totalLabel = page.getByTestId('total-label');
   }
 
   // verify the checkout information page is displayed properly
