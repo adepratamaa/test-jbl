@@ -8,11 +8,11 @@ import { CheckoutPage } from '../src/pages/CheckoutPage';
 
 // verify checkout can be completed
 test('User can checkout the cart', async ({ page }) => {
-  const productsPage = new InventoryPage(page);
+  const inventoryPage = new InventoryPage(page);
   const checkoutPage = new CheckoutPage(page);
 
   await page.goto('/inventory.html');
-  await productsPage.expectLoaded();
+  await inventoryPage.expectLoaded();
 
   const cartPage = new CartPage(page);
   const productItem = new ProductItem(page);
@@ -25,11 +25,11 @@ test('User can checkout the cart', async ({ page }) => {
 
   await productItem.addToCart(backpack);
   await productItem.addToCart(bikeLight);
-  await expect(productsPage.shoppingCartBadge).toHaveText('2');
+  await expect(inventoryPage.shoppingCartBadge).toHaveText('2');
   await expect(productItem.removeButton(backpack)).toBeVisible();
   await expect(productItem.removeButton(bikeLight)).toBeVisible();
 
-  await productsPage.cartLink.click();
+  await inventoryPage.cartLink.click();
   await cartPage.expectLoaded();
   await productItem.expectQuantity(backpack, '1');
   await productItem.expectQuantity(bikeLight, '1');
@@ -55,5 +55,5 @@ test('User can checkout the cart', async ({ page }) => {
   await checkoutPage.expectCompleteLoaded();
 
   await checkoutPage.backHomeButton.click();
-  await productsPage.expectLoaded();
+  await inventoryPage.expectLoaded();
 });

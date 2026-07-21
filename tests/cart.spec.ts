@@ -6,45 +6,45 @@ import { ProductItem } from '../src/pages/ProductItem';
 
 // open inventory page using auth session
 test.beforeEach(async ({ page }) => {
-  const productsPage = new InventoryPage(page);
+  const inventoryPage = new InventoryPage(page);
 
   await page.goto('/inventory.html');
-  await productsPage.expectLoaded();
+  await inventoryPage.expectLoaded();
 });
 
 // verify a product can be added to the cart
 test('User can add product to cart and verify the badge', async ({ page }) => {
-  const productsPage = new InventoryPage(page);
+  const inventoryPage = new InventoryPage(page);
   const productItem = new ProductItem(page);
   const bikeLight = products[0];
 
   await productItem.addToCart(bikeLight.name);
-  await expect(productsPage.shoppingCartBadge).toHaveText('1');
+  await expect(inventoryPage.shoppingCartBadge).toHaveText('1');
 });
 
 // verify user can remove product from inventory page
 test('User can remove product from inventory page', async ({ page }) => {
-  const productsPage = new InventoryPage(page);
+  const inventoryPage = new InventoryPage(page);
   const productItem = new ProductItem(page);
   const bikeLight = products[0];
   const boltTShirt = products[1];
 
   await productItem.addToCart(bikeLight.name);
   await expect(productItem.removeButton(bikeLight.name)).toBeVisible();
-  await expect(productsPage.shoppingCartBadge).toHaveText('1');
+  await expect(inventoryPage.shoppingCartBadge).toHaveText('1');
 
   await productItem.addToCart(boltTShirt.name);
   await expect(productItem.removeButton(boltTShirt.name)).toBeVisible();
-  await expect(productsPage.shoppingCartBadge).toHaveText('2');
+  await expect(inventoryPage.shoppingCartBadge).toHaveText('2');
 
   await productItem.removeFromCart(boltTShirt.name);
   await expect(productItem.addButton(boltTShirt.name)).toBeVisible();
-  await expect(productsPage.shoppingCartBadge).toHaveText('1');
+  await expect(inventoryPage.shoppingCartBadge).toHaveText('1');
 });
 
 // verify user can remove product from cart page
 test('User can remove product from cart page', async ({ page }) => {
-  const productsPage = new InventoryPage(page);
+  const inventoryPage = new InventoryPage(page);
   const cartPage = new CartPage(page);
   const productItem = new ProductItem(page);
   const bikeLight = products[0];
@@ -54,13 +54,13 @@ test('User can remove product from cart page', async ({ page }) => {
 
   await productItem.addToCart(bikeLight.name);
   await expect(productItem.removeButton(bikeLight.name)).toBeVisible();
-  await expect(productsPage.shoppingCartBadge).toHaveText('1');
+  await expect(inventoryPage.shoppingCartBadge).toHaveText('1');
 
   await productItem.addToCart(boltTShirt.name);
   await expect(productItem.removeButton(boltTShirt.name)).toBeVisible();
-  await expect(productsPage.shoppingCartBadge).toHaveText('2');
+  await expect(inventoryPage.shoppingCartBadge).toHaveText('2');
 
-  await productsPage.cartLink.click();
+  await inventoryPage.cartLink.click();
   await cartPage.expectLoaded();
   await productItem.expectQuantity(bikeLight.name, '1');
   await productItem.expectQuantity(boltTShirt.name, '1');
@@ -69,8 +69,8 @@ test('User can remove product from cart page', async ({ page }) => {
 
   await productItem.removeFromCart(bikeLight.name);
   await expect(productItem.removeButton(bikeLight.name)).not.toBeVisible();
-  await expect(productsPage.shoppingCartBadge).toHaveText('1');
+  await expect(inventoryPage.shoppingCartBadge).toHaveText('1');
   await productItem.removeFromCart(boltTShirt.name);
   await expect(productItem.removeButton(boltTShirt.name)).not.toBeVisible();
-  await expect(productsPage.shoppingCartBadge).not.toBeVisible();
+  await expect(inventoryPage.shoppingCartBadge).not.toBeVisible();
 });
